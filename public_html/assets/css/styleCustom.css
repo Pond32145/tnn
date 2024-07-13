@@ -1,0 +1,246 @@
+.scrolled {
+  background-color: #7190a5;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.178);
+}
+.nav-btn {
+  display: flex;
+  align-items: center;
+}
+body {
+  font-family: Kanit, sans-serif;
+}
+.link_txt {
+  color: #98adba !important;
+  margin-bottom: 5px;
+  font-family: Kanit, sans-serif;
+  line-height: 30px;
+}
+.scrolled {
+  background-color: #10497b;
+}
+.img_bg_sectop {
+  height: 100vh;
+  object-fit: cover;
+}
+.container.con_top {
+  justify-content: center;
+}
+.box_icon_social {
+  width: 100%;
+  margin-top: 20vh;
+}
+.icon_top {
+  width: 80px;
+  height: auto;
+}
+.sec_top {
+  /* เอา padding-bottom ออก */
+  padding-bottom: none;
+ 
+}
+.p_sectop.th {
+  line-height: 32px;
+}
+.h2_th,
+.p_sectop.th {
+  line-height: 45px;
+}
+@media screen and (max-width: 991px) {
+  .box_text_top {
+    margin-top: 0 !important;
+  }
+  .sec_top {
+    padding-bottom: unset !important;
+  }
+  .box_icon_social {
+    padding-bottom: 70px;
+  }
+  .box_text_top {
+    margin-top: 20vh;
+  }
+  .w-icon-nav-menu:before {
+    display: block;
+    margin-top: -9px !important;
+  }
+  .icon {
+    width: 20px;
+    margin-right: 0;
+    margin-top: -3px;
+  }
+  .container.con_top {
+    top: unset;
+  }
+  .h2_th {
+    line-height: 50px;
+  }
+  .w-nav[data-collapse="medium"] .w-nav-menu {
+    border-top: 1px solid #fff;
+  }
+}
+@media screen and (max-width: 767px) {
+  .h2_th,
+  .p_sectop.th {
+    line-height: 32px;
+  }
+  .btn_about {
+    padding: 12px 40px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+    .btn-nav-all{
+        display: flex;
+    }
+  .container.con_top {
+    height: auto;
+    justify-content: center;
+    padding-top: 0;
+    align-items: center;
+  }
+}
+
+.btn-nav-all {
+  display: none;
+  margin-left: auto;
+  margin-right: 0;
+}
+.nav-btn.mobile{
+    display: none;
+}
+.nav_menu{
+    margin-right: 0;
+}
+@media screen and (max-width: 991px) {
+  .logo_m {
+    width: 35px;
+  }
+  .nav-btn {
+    display: none;
+  }
+  .nav-btn.mobile {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn-nav-all{
+    display: flex;
+}
+.nav_link.dropdown{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 0 !important;
+  & a{
+    padding-left: 0 !important;
+    margin-right: auto;
+    margin-left: 0 !important;
+  }
+}
+
+}
+.nav_link {
+font-size: 16px;
+}
+.nav_link.dropdown{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & a{
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+.icon-down{
+  margin-left: 5px;
+}
+.w-dropdown-toggle {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.img_bg_sectop {
+    height: 100%;
+}
+
+/* Nite Custom */
+.container.box_icon_socail_in {
+    margin-bottom: 0;
+}
+.container.con_top {
+    display: block;
+    padding-top: 0;
+    position: absolute !important;
+    top: 0;
+    left: auto;
+    right: auto;
+    max-width: 100%;
+    overflow: hidden;
+}
+.box_text_top {
+    margin-top: 20vh !important;
+}
+.box_icon_social {
+    margin-top: 0;
+    position: absolute !important;
+}
+.sec_top {
+    display: block;
+}
+.box_text_top {
+    margin-top: 20vh !important;
+    max-width: 1440px;
+    width: 100%;
+    margin: auto;
+    padding: 0 6%;
+}
+.box_icon_social {
+    bottom: 7vh;
+}
+
+.insects_bg {
+  min-height: 250px;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 991px) {
+  .container.container_tab01-1 ,.product-detail{
+    margin-top: 60px;
+}
+    .sec_top {
+        padding-top: 0 !important;
+        height: 100vh !important;
+    }
+    .container.con_top {
+        top: unset !important;
+        position: relative;
+        background: transparent;
+        z-index: 1;
+    }
+    .img_bg_sectop {
+        position: absolute;
+        z-index: 0;
+    }
+    .box_icon_social {
+        padding-bottom: 60px;
+        bottom: 0;
+    }
+}
+
+@media only screen and (max-width: 1440px) {
+    .box_text_top {
+            padding: 0;
+        }
+}
+
+@media only screen and (max-width: 479px) {
+
+    .container.con_top {
+        top: 10vh !important;
+    }
+    .box_text_top {
+        padding: 5%;
+        margin-top: 0 !important;
+    }
+}
