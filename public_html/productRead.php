@@ -19,9 +19,9 @@ $result = $conn->query($sql);
 
 <head>
     <title>รายการยา</title>
+    <link rel="stylesheet" href="./assets/css/back.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/back.css">
     <style>
         .dataTables_wrapper .dataTables_paginate .paginate_button {
             padding: 2px 8px;
@@ -35,6 +35,7 @@ $result = $conn->query($sql);
         .table-container {
             max-width: 100%;
             overflow-x: auto;
+
         }
 
         .table td,
@@ -49,12 +50,13 @@ $result = $conn->query($sql);
 
         .table th {
             text-align: center;
+            padding-right: 100px;
         }
 
         .table th,
         .table td {
             white-space: nowrap;
-            text-align: center;
+            /* text-align: center; */
             vertical-align: middle;
         }
 
@@ -65,13 +67,32 @@ $result = $conn->query($sql);
             background-color: white;
         }
 
+
+        body {
+            background-image: url("./assets/image/658a6d9fe6f232cee6592fbc_Group 1172.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            padding-top: 100px;
+            /* height: 987px; */
+        }
+
+        .btnn {
+            padding: 6px;
+            border-radius: 5px;
+            text-decoration: none;
+            background-color: green;
+            color: #e9ecef;
+            margin: 0 10px;
+            font-size: 13px;
+        }
+
+        .bg-sha {
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+        }
+
         .table th:nth-child(1),
         .table td:nth-child(1) {
-            width: 50px;
-            /* position: sticky;
-            left: 0;
-            z-index: 2;
-            background-color: #fff; */
+            width: 150px;
         }
 
         .table th:nth-child(2),
@@ -82,10 +103,6 @@ $result = $conn->query($sql);
         .table th:nth-child(3),
         .table td:nth-child(3) {
             width: 150px;
-            /* position: sticky;
-            left: 50px;
-            z-index: 1;
-            background-color: #fff; */
         }
 
         .table th:nth-child(4),
@@ -126,28 +143,21 @@ $result = $conn->query($sql);
         .table th:nth-child(11),
         .table td:nth-child(11) {
             width: 150px;
-     
-        }
-        body{
-            background-image: url("./assets/image/658a6d9fe6f232cee6592fbc_Group 1172.png");
-            background-repeat: no-repeat;
-            background-size: contain;
-            padding-top: 100px;
         }
     </style>
 
 </head>
 
-<body >
+<body>
 
-<!-- <img src="./assets/image/658a6d9fe6f232cee6592fbc_Group 1172.png" alt="" class="header-background w-100"> -->
+    <!-- <img src="./assets/image/658a6d9fe6f232cee6592fbc_Group 1172.png" alt="" class="header-background w-100"> -->
 
 
-    <div class="container mt-5 p-3 bg-white" style="border-radius: 8px; margin-bottom:30px;">
-        <div></div>
+    <div class="container mt-5 p-3 bg-white bg-sha" style="border-radius: 8px; margin-bottom:30px; ">
+
         <div class="d-flex justify-content-between">
             <h2 class="mb-3">รายการข้อมูลยา</h2>
-            <a href="productCreate.php" class="btn btn-primary mb-3  w-25">เพิ่มข้อมูล</a>
+
         </div>
         <div class="mb-3 flex d-flex justify-content-end align-items-center" style="font-size: medium;">
             <label for="filterType" class="form-label pt-2" style="font-size: small;text-decoration: none;">กรองตามประเภทยา:</label>
@@ -159,6 +169,7 @@ $result = $conn->query($sql);
                 <option value="4">วัชพืช</option>
                 <option value="5">สารเสริม</option>
             </select>
+            <a href="productCreate.php" class="btnn">เพิ่มข้อมูล</a>
         </div>
         <?php
 
@@ -170,8 +181,8 @@ $result = $conn->query($sql);
         ?>
 
         <?php if ($result->num_rows > 0) : ?>
-            <div class="table-responsive table-container" style=" margin: 0 10px 0 10px;">
-                <table class="table table-striped" id="Table" style="max-height: 50vh; margin: 0 10px 0 10px;">
+            <div class="table-responsive table-container" >
+                <table class="table table-striped" id="Table">
                     <thead class="text-center">
                         <tr>
                             <th>#</th>
@@ -214,6 +225,7 @@ $result = $conn->query($sql);
                     </tbody>
                 </table>
             </div>
+
         <?php else : ?>
             <!-- <div class="alert alert-warning" role="alert">0 results</div> -->
         <?php endif; ?>
@@ -229,6 +241,7 @@ $result = $conn->query($sql);
         $(document).ready(function() {
             var table = $('#Table').DataTable({
                 "scrollX": true,
+                "scrollY": "700px",
                 "language": {
                     "search": "ค้นหา: ",
                     "info": "แสดง _START_ ถึง _END_ จาก _TOTAL_ รายการ",
@@ -267,5 +280,6 @@ $result = $conn->query($sql);
 
 
 </body>
+
 </html>
-<?php include 'footerAdmin.php' ?> 
+<?php include 'footerAdmin.php' ?>

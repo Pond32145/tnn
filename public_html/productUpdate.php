@@ -22,11 +22,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $usage_rate = $_POST['usage_rate'];
         $feature = $_POST['feature'];
         $benefit = $_POST['benefit'];
+        $type_id = $_POST['type_id']; // เพิ่มฟิลด์ type_id จากฟอร์ม
 
         // ตรวจสอบว่ามีการอัปโหลดไฟล์ภาพหรือไม่
         if ($_FILES["image"]["name"]) {
             // เลือกเส้นทางไฟล์ภาพเดิมจากฐานข้อมูล
-            $sqlSelect = "SELECT * FROM hormone WHERE id=$id";
+            $sqlSelect = "SELECT * FROM product WHERE id=$id"; // เปลี่ยนจาก hormone เป็น product
             $resultSelect = $conn->query($sqlSelect);
 
             if ($resultSelect->num_rows > 0) {
@@ -85,7 +86,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 usage_rate='$usage_rate', 
                                 feature='$feature', 
                                 benefit='$benefit', 
-                                image='$target_file' 
+                                image='$target_file',
+                                type_id='$type_id' 
                                 WHERE id=$id";
 
                             if ($conn->query($sqlUpdate) === TRUE) {
@@ -126,7 +128,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 packing_size='$packing_size', 
                 usage_rate='$usage_rate', 
                 feature='$feature', 
-                benefit='$benefit' 
+                benefit='$benefit',
+                type_id='$type_id' 
                 WHERE id=$id";
 
             if ($conn->query($sqlUpdate) === TRUE) {
@@ -147,8 +150,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "เกิดข้อผิดพลาดในการอัปเดตบันทึก: " . $conn->error;
             }
         }
-
-        //$conn->close(); // ปิดการเชื่อมต่อฐานข้อมูล
     } else {
         echo "พารามิเตอร์ ID ไม่ได้ระบุ.";
     }
@@ -164,6 +165,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/back.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <style>
+        .btnn {
+            padding: 6px;
+            border-radius: 5px;
+            text-decoration: none;
+            background-color: green;
+            color: #e9ecef;
+            margin: 0 10px;
+            font-size: 13px;
+        }
+    </style>
 </head>
 
 <body>
@@ -188,8 +201,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="col-md-6 mb-3 text-end pt-3">
                             <label for="new_image" class="form-label">อัปโหลดรูปภาพใหม่</label>
-                            <input type="file" class="form-control mb-3" id="new_image" name="image" accept="image/*">
-
+                            <input type="file" class="form-control mb-3" id="new_image" value="<?php echo basename($row['image']); ?>" name="image" accept="image/*">
+                            
                         </div>
 
                         <div class="col-md-6 mb-3">
@@ -198,14 +211,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="group_name" class="form-label">ชื่อกลุ่ม</label>
-                            <input type="text" class="form-control" id="group_name" name="group_name" value="<?= $row['group_name'] ?>" required>
+                            <label for="type_id" class="form-label">ยาประเภท</label>
+                            <select class="form-select" id="type_id" name="type_id" required>
+                                <option value="">เลือกประเภท</option>
+                                <option value="1" <?= $row['type_id'] == 1 ? 'selected' : '' ?>>ฮอร์โมน</option>
+                                <option value="2" <?= $row['type_id'] == 2 ? 'selected' : '' ?>>โรคพืช</option>
+                                <option value="3" <?= $row['type_id'] == 3 ? 'selected' : '' ?>>แมลง</option>
+                                <option value="4" <?= $row['type_id'] == 4 ? 'selected' : '' ?>>วัชพืช</option>
+                                <option value="5" <?= $row['type_id'] == 5 ? 'selected' : '' ?>>สารเสริม</option>
+                            </select>
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="common_name" class="form-label">ชื่อทั่วไป</label>
                             <input type="text" class="form-control" id="common_name" name="common_name" value="<?= $row['common_name'] ?>" required>
                         </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="group_name" class="form-label">ชื่อกลุ่ม</label>
+                            <input type="text" class="form-control" id="group_name" name="group_name" value="<?= $row['group_name'] ?>" required>
+                        </div>
+
                         <div class="col-md-6 mb-3">
                             <label for="group_id" class="form-label">กลุ่ม</label>
                             <input type="text" class="form-control" id="group_id" name="group_id" value="<?= $row['common_name'] ?>" required>
@@ -236,15 +261,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <textarea class="form-control" id="benefit" name="benefit" rows="3" required><?= $row['benefit'] ?></textarea>
                         </div>
                         <div class="col-md mb-3 text-end">
-                            <button type="submit" class="btn btn-primary">อัปเดต</button>
-                            <a href="productRead.php" class="btn btn-secondary">ย้อนกลับ</a>
+                            <button type="submit" class="btnn">อัปเดต</button>
+                            <a href="productRead.php" class="btnn">ย้อนกลับ</a>
                         </div>
-
-
                     </div>
-
-
-
             <?php
                 } else {
                     echo "ไม่พบข้อมูล.";
@@ -256,6 +276,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 </body>
-
 </html>
-<?php include 'footerAdmin.php' ?> 
+<?php include 'footerAdmin.php' ?>

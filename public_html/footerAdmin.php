@@ -16,7 +16,8 @@
             background-color: #10497b;
             color: #fff;
             text-align: center;
-            padding: 10px 0;
+            padding: 20px 0;
+            margin-top: 20px;
         }
     </style>
 </head>

@@ -109,22 +109,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>เพิ่มยาฮอร์โมน</title>
     <link rel="stylesheet" href="./assets/css/back.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    
 
+    <style>
+        .btnn {
+            padding: 6px;
+            border-radius: 5px;
+            text-decoration: none;
+            /* background-color: green; */
+            color: #e9ecef;
+            margin: 0 10px;
+            font-size: 13px;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container mt-5 pt-5">
-        <h2 class="mb-4">เพิ่มยาฮอร์โมน</h2>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btnn" onclick="window.location.href ='productRead.php'"><i class="fa-solid fa-arrow-left-long"></i>ย้อนกลับ</button>
+            <h2 class="mb-4">เพิ่มยาฮอร์โมน</h2>
+        </div>
         <hr style="width: 50%;">
 
         <form method="post" enctype="multipart/form-data">
             <div class="row">
-            <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-3">
                     <label for="product_name" class="form-label">ชื่อสินค้า</label>
                     <input type="text" class="form-control" id="product_name" name="product_name" required>
                 </div>
-        
+
                 <div class="col-md-6 mb-3">
                     <label for="type_id" class="form-label">ยาประเภท</label>
                     <select class="form-select" id="type_id" name="type_id" required>
@@ -148,7 +164,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="common_name" class="form-label">ชื่อสามัญ</label>
                     <input type="text" class="form-control" id="common_name" name="common_name" required>
                 </div>
-             
+
 
 
                 <div class="col-md-6 mb-3">
@@ -177,8 +193,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
             <div class="col-md-12 mt-4 text-end">
-                <button type="submit" class="btn btn-success">เพิ่ม</button>
-                <button type="submit" class="btn btn-primary" onclick="window.location.href ='productRead.php'">ย้อนกลับ</button>
+                <button type="submit" class="btnn">เพิ่ม</button>
+
             </div>
         </form>
     </div>
@@ -186,4 +202,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </html>
 
-<?php include 'footerAdmin.php' ?> 
+<?php include 'footerAdmin.php' ?>
