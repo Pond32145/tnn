@@ -1,5 +1,13 @@
 <?php
-include './connectdb.php';
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$chekeStartPage = true;
+include 'headerAdmin.php';
+include 'connectdb.php';
 
 $sql = "SELECT * FROM product";
 $result = $conn->query($sql);
@@ -10,7 +18,7 @@ $result = $conn->query($sql);
 <html>
 
 <head>
-    <title>รายการยาฮอร์โมน</title>
+    <title>รายการยา</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/back.css">
@@ -38,9 +46,11 @@ $result = $conn->query($sql);
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .table th{
-           text-align: center;
+
+        .table th {
+            text-align: center;
         }
+
         .table th,
         .table td {
             white-space: nowrap;
@@ -58,10 +68,10 @@ $result = $conn->query($sql);
         .table th:nth-child(1),
         .table td:nth-child(1) {
             width: 50px;
-            position: sticky;
+            /* position: sticky;
             left: 0;
             z-index: 2;
-            background-color: #fff;
+            background-color: #fff; */
         }
 
         .table th:nth-child(2),
@@ -116,41 +126,52 @@ $result = $conn->query($sql);
         .table th:nth-child(11),
         .table td:nth-child(11) {
             width: 150px;
+     
+        }
+        body{
+            background-image: url("./assets/image/658a6d9fe6f232cee6592fbc_Group 1172.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            padding-top: 100px;
         }
     </style>
 
 </head>
 
-<body>
+<body >
 
-    <div class="container mt-5">
+<!-- <img src="./assets/image/658a6d9fe6f232cee6592fbc_Group 1172.png" alt="" class="header-background w-100"> -->
+
+
+    <div class="container mt-5 p-3 bg-white" style="border-radius: 8px; margin-bottom:30px;">
+        <div></div>
         <div class="d-flex justify-content-between">
             <h2 class="mb-3">รายการข้อมูลยา</h2>
-            <a href="hormoneCreate.php" class="btn btn-primary mb-3">เพิ่มข้อมูล</a>
+            <a href="productCreate.php" class="btn btn-primary mb-3  w-25">เพิ่มข้อมูล</a>
         </div>
-        <div class="mb-3">
-        <label for="filterType" class="form-label">กรองตามประเภทยา:</label>
-        <select class="form-select" id="filterType">
-            <option value="">ทั้งหมด</option>
-            <option value="1">ฮอร์โมน</option>
-            <option value="2">โรคพืช</option>
-            <option value="3">แมลง</option>
-            <option value="4">วัชพืช</option>
-            <option value="5">สารเสริม</option>
-        </select>
-    </div>
+        <div class="mb-3 flex d-flex justify-content-end align-items-center" style="font-size: medium;">
+            <label for="filterType" class="form-label pt-2" style="font-size: small;text-decoration: none;">กรองตามประเภทยา:</label>
+            <select class="form-select" style="width: 100px;font-size: small;" id="filterType">
+                <option value="">ทั้งหมด</option>
+                <option value="1">ฮอร์โมน</option>
+                <option value="2">โรคพืช</option>
+                <option value="3">แมลง</option>
+                <option value="4">วัชพืช</option>
+                <option value="5">สารเสริม</option>
+            </select>
+        </div>
         <?php
-       
 
-       $sql = "SELECT p.*, pt.name AS type_name
+
+        $sql = "SELECT p.*, pt.name AS type_name
        FROM product p
        LEFT JOIN product_type pt ON p.type_id = pt.id";
         $result = $conn->query($sql);
         ?>
 
         <?php if ($result->num_rows > 0) : ?>
-            <div class="table-responsive table-container">
-                <table class="table table-striped" id="Table">
+            <div class="table-responsive table-container" style=" margin: 0 10px 0 10px;">
+                <table class="table table-striped" id="Table" style="max-height: 50vh; margin: 0 10px 0 10px;">
                     <thead class="text-center">
                         <tr>
                             <th>#</th>
@@ -185,7 +206,7 @@ $result = $conn->query($sql);
                                 <td><?= $row["feature"] ?></td>
                                 <td><?= $row["benefit"] ?></td>
                                 <td>
-                                    <a href="hormoneUpdate.php?id=<?= $row["id"] ?>" class="btn btn-warning btn-sm">แก้ไข</a>
+                                    <a href="productUpdate.php?id=<?= $row["id"] ?>" class="btn btn-warning btn-sm">แก้ไข</a>
                                     <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete(<?= $row["id"] ?>)">ลบ</a>
                                 </td>
                             </tr>
@@ -237,14 +258,14 @@ $result = $conn->query($sql);
                 cancelButtonText: 'ยกเลิก'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = `hormoneDelete.php?id=${id}`;
+                    window.location.href = `productDelete.php?id=${id}`;
                 }
             });
         }
     </script>
 
-    
+
 
 </body>
-
 </html>
+<?php include 'footerAdmin.php' ?> 

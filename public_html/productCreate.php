@@ -1,5 +1,12 @@
 <?php
-include './connectdb.php';
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+$chekeStartPage = false;
+include 'headerAdmin.php';
+include 'connectdb.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $product_name = $_POST['product_name'];
@@ -68,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 confirmButtonText: 'ตกลง'
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    window.location.href = 'hormoneRead.php';
+                                    window.location.href = 'productRead.php';
                                 }
                             });
                         });
@@ -107,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <div class="container mt-5">
+    <div class="container mt-5 pt-5">
         <h2 class="mb-4">เพิ่มยาฮอร์โมน</h2>
         <hr style="width: 50%;">
 
@@ -171,10 +178,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="col-md-12 mt-4 text-end">
                 <button type="submit" class="btn btn-success">เพิ่ม</button>
-                <button type="submit" class="btn btn-primary" onclick="window.location.href ='hormoneRead.php'">ย้อนกลับ</button>
+                <button type="submit" class="btn btn-primary" onclick="window.location.href ='productRead.php'">ย้อนกลับ</button>
             </div>
         </form>
     </div>
 </body>
 
 </html>
+
+<?php include 'footerAdmin.php' ?> 

@@ -11,7 +11,7 @@
     }
 
     .w-dropdown-list {
-      font-family: Kanit, sans-serif;
+      /* font-family: Kanit, sans-serif; */
       background: rgba(170, 188, 201, 0.7287289915966386) !important;
       backdrop-filter: blur(10px);
     }
@@ -47,6 +47,14 @@
       .w-dropdown-list.w--nav-dropdown-list-open.w--open {
         margin-left: -6% !important;
       }
+    }
+
+
+
+    .fixed {
+      position: fixed;
+      top: 0;
+      width: 100%;
     }
   </style>
   <meta charset="utf-8" />
@@ -159,64 +167,29 @@
 </head>
 
 <body cz-shortcut-listen="true">
-  <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav" id="scrollElement">
+  <div class="fixed" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav" id="scrollElement">
     <div class="nav_bar w-container"><a href="./" class="brand w-nav-brand">
-        <div class="text_logo">T&amp;N Chemical</div>
+        <div class="text_logo">Admin DB | T&amp;N Chemical</div>
       </a>
       <nav role="navigation" class="nav_menu w-nav-menu">
-        <a href="about_us.php" class="nav_link w-nav-link" style="max-width: 1440px;">เกี่ยวกับเรา</a>
-        <!-- <a href="product.php" class="nav_link w-nav-link" style="max-width: 1440px;">ผลิตภัณฑ์</a> -->
-        <div data-hover="false" data-delay="0" class="dropdown-2 w-dropdown" style="max-width: 1440px;">
-          <div class="nav_link dropdown w-dropdown-toggle" id="w-dropdown-toggle-0" aria-controls="w-dropdown-list-0" aria-haspopup="menu" aria-expanded="false" role="button" tabindex="0">
 
+        <a href="productRead.php" class="nav_link w-nav-link" style="max-width: 1440px;" onclick="highlightLink(this)">จัดการข้อมูลสินค้า</a>
+        <a href="contact.php" class="nav_link w-nav-link" style="max-width: 1440px;" onclick="highlightLink(this)">จัดการผู้ใช้</a>
+        <a href="contact.php" class="nav_link w-nav-link" style="max-width: 1440px;" onclick="highlightLink(this)">โปรไฟล์</a>
+        <a href="logout.php" class="nav_link w-nav-link" style="max-width: 1440px;color:red;" onclick="highlightLink(this)">ออกจากระบบ</a>
 
-            <a href="product.php" class="nav_link w-nav-link" style="text-decoration: none; padding:0px;">ผลิตภัณฑ์ </a>
-            <img src="./assets/image/caret-down.svg" alt="" class="icon-down">
-          </div>
-          <nav class="w-dropdown-list" id="w-dropdown-list-0" aria-labelledby="w-dropdown-toggle-0">
-            <a href="Insects.php" class="w-dropdown-link" tabindex="0">แมลง</a>
-            <a href="Weeds.php" class="w-dropdown-link" tabindex="0">วัชพืช</a>
-            <a href="Supplements.php" class="w-dropdown-link" tabindex="0">สารเสริม</a>
-            <a href="Hormones.php" class="w-dropdown-link" tabindex="0">ฮอร์โมน</a>
-            <a href="PlantDiseases.php" class="w-dropdown-link" tabindex="0">โรคพืช</a>
-          </nav>
-        </div>
-
-        <a href="experimental_results.php" class="nav_link w-nav-link" style="max-width: 1440px;">ผลการทดลอง</a>
-        <a href="technique.php" class="nav_link w-nav-link" style="max-width: 1440px;">เทคนิคการใช้</a>
-        <a href="contact.php" class="nav_link w-nav-link" style="max-width: 1440px;">ติดต่อ</a>
-        <a href="login.php" class="nav_link w-nav-link" style="max-width: 1440px;">เข้าสู่ระบบ</a>
         <div class="nav-btn">
-
           <a href="#" class="link_logo w-inline-block">
             <img src="./assets/image/65716e6f33cc4d93c22c0c7e_logo.svg" loading="lazy" alt="" class="logo_m"></a>
-
         </div>
 
       </nav>
-      <div class="btn-nav-all">
-        <div class="menu-button w-nav-button" style="-webkit-user-select: text;" aria-label="menu" role="button" tabindex="0" aria-controls="w-nav-overlay-0" aria-haspopup="menu" aria-expanded="false">
-          <div class="icon w-icon-nav-menu"></div>
-        </div>
-        <div class="nav-btn mobile">
-          <div class="box_en_th">
-            <div class="box_btn_en_th">
-              <div class="box_btn">
-                <div data-w-id="02cb70f1-875e-1845-5fce-48cb39a68a41" class="btn">
-                  <div class="ball_btn"></div>
-                </div>
-              </div>
-              <div class="box_text">
-                <div class="text_en_th th">TH</div>
-                <div class="text_en_th en">EN</div>
-              </div>
-            </div>
-          </div>
-          <a href="#" class="link_logo w-inline-block">
-            <img src="./assets/image/65716e6f33cc4d93c22c0c7e_logo.svg" loading="lazy" alt="" class="logo_m"></a>
-        </div>
-      </div>
-
+     
     </div>
     <div class="w-nav-overlay" data-wf-ignore="" id="w-nav-overlay-0"></div>
   </div>
+
+
+</body>
+
+</html>

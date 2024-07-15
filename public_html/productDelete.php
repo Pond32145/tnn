@@ -1,6 +1,13 @@
 <link rel="stylesheet" href="./assets/css/back.css">
 <?php
-include './connectdb.php';
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+// $chekeStartPage = false;
+// include 'headerAdmin.php';
+include 'connectdb.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -20,7 +27,7 @@ if (isset($_GET['id'])) {
             // Delete image file from directory
             if (unlink($imagePath)) {
                 // Redirect to read.php after successful deletion
-                header('Location: hormoneRead.php');
+                header('Location: productRead.php');
                 exit;
             } else {
                 echo "Failed to delete image file.";

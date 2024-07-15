@@ -1,5 +1,12 @@
 <?php
-include './connectdb.php';
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+include 'connectdb.php';
+$chekeStartPage = false;
+include 'headerAdmin.php';
 
 // ตรวจสอบว่ามีการส่งข้อมูลแบบ POST มาหรือไม่
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -91,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 showConfirmButton: false,
                                                 timer: 1000
                                             }).then(() => {
-                                                window.location.href = 'hormoneRead.php';
+                                                window.location.href = 'productRead.php';
                                             });
                                         });
                                       </script>";
@@ -132,7 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 showConfirmButton: false,
                                 timer: 1000
                             }).then(() => {
-                                window.location.href = 'hormoneRead.php';
+                                window.location.href = 'productRead.php';
                             });
                         });
                       </script>";
@@ -160,7 +167,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <div class="container mt-5 mb-5">
+    <div class="container mt-5 mb-5 pt-5">
         <h2 class="mb-4">อัปเดตยาข้อมูลยา</h2>
         <hr style="width: 50%;">
         <form method="post" enctype="multipart/form-data">
@@ -230,7 +237,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="col-md mb-3 text-end">
                             <button type="submit" class="btn btn-primary">อัปเดต</button>
-                            <a href="hormoneRead.php" class="btn btn-secondary">ย้อนกลับ</a>
+                            <a href="productRead.php" class="btn btn-secondary">ย้อนกลับ</a>
                         </div>
 
 
@@ -251,3 +258,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </body>
 
 </html>
+<?php include 'footerAdmin.php' ?> 
