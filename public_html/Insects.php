@@ -1,39 +1,40 @@
-
 <?php 
 $chekeStartPage = true; 
-include 'header.php'; 
-?>
-<?php include 'product-data.php'; ?>
-<?php 
+include 'header.php';  
+include 'connectdb.php';
+
+// ดึงข้อมูลจากฐานข้อมูลเฉพาะ type_id = 1
+$sql = "SELECT * FROM product WHERE type_id = 3";
+$result = $conn->query($sql);
+
+// รวมไฟล์ข้อมูลสินค้า
+include 'product-data.php'; 
     $name_product = $product_insects['name_product'];
     $part_product_items = $product_insects['part_file'];
-    $product_items = $product_insects['product_item'];
     $image_product = $product_insects['image_product'];
-    $count = $product_insects['count_item'];
 ?>
-    <section class="sec_insects_header"><img src="<?php echo $part_product_items . $image_product ?>" loading="lazy" sizes="100vw" alt="" class="insects_bg">
-        <div class="box_h1">
-
-            <h1 class="heading-3"><?php echo $name_product ?></h1>
-
-        </div>
-        <div class="header_bottom">
-            <p class="txt_prop">ผลิตภัณฑ์</p>
-            <div class="prop"></div>
-        </div>
-    </section>
-    <section class="show_product">
-        <div class="container container_show_product">
-            <div class="box_grid_product">
-               <?php for ($y=1;$y <= $count;$y++) { ?>
-                <a href="./productDetail.php?item=<?php echo $product_items . $y ?>&category=insects" id="w-node-fa7b6bf6-1bff-0acd-a31e-5e455d4fb77d-79303951" class="grid_item_product">
-                    <img src="<?php echo $part_product_items . $product_items . $y .".png" ?>" loading="lazy" alt="" class="image_item">
+<section class="sec_insects_header">
+    <img src="<?php echo $part_product_items . $image_product ?>" loading="lazy" sizes="100vw" alt="" class="insects_bg">
+    <div class="box_h1">
+        <h1 class="heading-3"><?php echo $name_product ?></h1>
+    </div>
+    <div class="header_bottom">
+        <p class="txt_prop">ผลิตภัณฑ์</p>
+        <div class="prop"></div>
+    </div>
+</section>
+<section class="show_product">
+    <div class="container container_show_product">
+        <div class="box_grid_product" style="text-align: center;">
+            <?php while ($row = $result->fetch_assoc()) : ?>
+                <a href="./productDetail.php?id=<?= $row["id"] ?>" class="grid_item_product">
+                    <img src="<?= $row['image'] ?>" loading="lazy" alt="<?= $row['product_name'] ?>" class="image_item">
                 </a>
-                <?php } ?>
-            </div>
-            <div class="box_more">
-                <div data-w-id="063b9fe2-8290-1da1-530a-82f0ab3eb3ad" class="txt_more">ดูเพิ่มเติม ＞</div>
-            </div>
+            <?php endwhile; ?>
         </div>
-    </section>
+        <div class="box_more">
+            <div class="txt_more">ดูเพิ่มเติม ＞</div>
+        </div>
+    </div>
+</section>
 <?php include 'footer.php'; ?>
