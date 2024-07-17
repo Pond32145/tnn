@@ -23,14 +23,17 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         } else {
             // รหัสผ่านไม่ถูกต้อง
             echo "รหัสผ่านไม่ถูกต้อง";
+            header("Location: login.php");
         }
     } else {
         // ไม่พบชื่อผู้ใช้
         echo "ไม่พบชื่อผู้ใช้";
+        header("Location: login.php");
     }
 } else {
     // กรณีที่ไม่มีค่าที่คาดหวังจากฟอร์ม
     echo "กรุณากรอกชื่อผู้ใช้และรหัสผ่าน";
+    header("Location: login.php");
 }
 
 $conn->close();

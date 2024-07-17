@@ -28,7 +28,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <span class="">© 2024 Admin Panel. All rights reserved.</span>
+            <span class="">© 2024 Admin Panel. T&N Cermicals Co, Ltd. All rights reserved.</span>
         </div>
     </footer>
 

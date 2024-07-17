@@ -85,6 +85,9 @@ $result = $conn->query($sql);
             margin: 0 10px;
             font-size: 13px;
         }
+        .btnn:hover{
+            color:aqua;
+        }
 
         .bg-sha {
             box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
@@ -156,80 +159,90 @@ $result = $conn->query($sql);
     <div class="container mt-5 p-3 bg-white bg-sha" style="border-radius: 8px; margin-bottom:30px; ">
 
         <div class="d-flex justify-content-between">
-            <h2 class="mb-3">รายการข้อมูลยา</h2>
+            <!-- <a href="update_passForm.php">เปลี่ยนรหัสผ่าน</a> -->
+            <h2 class="mb-3">รายการข้อมูล</h2>
 
-        </div>
+        
         <div class="mb-3 flex d-flex justify-content-end align-items-center" style="font-size: medium;">
-            <label for="filterType" class="form-label pt-2" style="font-size: small;text-decoration: none;">กรองตามประเภทยา:</label>
+            <label for="filterType" class="form-label pt-2" style="font-size: small;text-decoration: none;">กรองตามประเภท :</label>
             <select class="form-select" style="width: 100px;font-size: small;" id="filterType">
                 <option value="">ทั้งหมด</option>
-                <option value="1">ฮอร์โมน</option>
-                <option value="2">โรคพืช</option>
-                <option value="3">แมลง</option>
-                <option value="4">วัชพืช</option>
-                <option value="5">สารเสริม</option>
+                <option value="ฮอร์โมน">ฮอร์โมน</option>
+                <option value="โรคพืช">โรคพืช</option>
+                <option value="แมลง">แมลง</option>
+                <option value="วัชพืช">วัชพืช</option>
+                <option value="สารเสริม">สารเสริม</option>
             </select>
             <a href="productCreate.php" class="btnn">เพิ่มข้อมูล</a>
         </div>
+    </div>
         <?php
-
+        // ตัวแปร $filterType ควรถูกกำหนดค่าก่อนที่จะถูกใช้งาน
+        $filterType = isset($_GET['filterType']) ? $_GET['filterType'] : '';
 
         $sql = "SELECT p.*, pt.name AS type_name
-       FROM product p
-       LEFT JOIN product_type pt ON p.type_id = pt.id";
+        FROM product p
+        LEFT JOIN product_type pt ON p.type_id = pt.id";
+
+        // ตรวจสอบว่ามีการกรองข้อมูลตามประเภทยาหรือไม่
+        if (!empty($filterType)) {
+            $sql .= " WHERE pt.id = " . intval($filterType);
+        }
+
         $result = $conn->query($sql);
         ?>
 
-        <?php if ($result->num_rows > 0) : ?>
-            <div class="table-responsive table-container" >
-                <table class="table table-striped" id="Table">
-                    <thead class="text-center">
+        <!-- ต่อไปคือการแสดงผลตาราง -->
+        <div class="table-responsive table-container">
+            <table class="table table-striped" id="Table">
+                <thead class="text-center">
+                    <tr>
+                        <th>#</th>
+                        <th>รูปภาพ</th>
+                        <th>ชื่อสินค้า</th>
+                        <th>ประเภท</th>
+                        <th>กลุ่ม</th>
+                        <th>ยาประเภท</th>
+                        <th>ชื่อสามัญ</th>
+                        <th>ลักษณะของสาร</th>
+                        <th>ขนาดบรรจุ</th>
+                        <th>อัตราการใช้งาน</th>
+                        <th>คุณสมบัติ</th>
+                        <th>ผลประโยชน์</th>
+                        <th>เพิ่มเติม</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $c = 0; ?>
+                    <?php while ($row = $result->fetch_assoc()) : ?>
+                        <?php $c++; ?>
                         <tr>
-                            <th>#</th>
-                            <th>รูปภาพ</th>
-                            <th>ชื่อสินค้า</th>
-                            <th>ประเภท</th>
-                            <th>กลุ่ม</th>
-                            <th>ยาประเภท</th>
-                            <th>ชื่อสามัญ</th>
-                            <th>ลักษณะของสาร</th>
-                            <th>ขนาดบรรจุ</th>
-                            <th>อัตราการใช้งาน</th>
-                            <th>คุณสมบัติ</th>
-                            <th>ผลประโยชน์</th>
-                            <th>เพิ่มเติม</th>
+                            <td><?= $c ?></td>
+                            <td><img src="<?= $row["image"] ?>" alt="Product Image" style="max-width: 50px;"></td>
+                            <td><?= $row["product_name"] ?></td>
+                            <td><?= $row["group_name"] ?></td>
+                            <td><?= $row["group_id"] ?></td>
+                            <td><?= $row["type_name"] ?></td>
+                            <td><?= $row["common_name"] ?></td>
+                            <td><?= $row["substance_characteristics"] ?></td>
+                            <td><?= $row["packing_size"] ?></td>
+                            <td><?= $row["usage_rate"] ?></td>
+                            <td><?= $row["feature"] ?></td>
+                            <td><?= $row["benefit"] ?></td>
+                            <td>
+                                <a href="productUpdate.php?id=<?= $row["id"] ?>" class="btn btn-warning btn-sm">แก้ไข</a>
+                                <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete(<?= $row["id"] ?>)">ลบ</a>
+                            </td>
+                       
                         </tr>
-                    </thead>
-                    <tbody>
-                        <?php $c = 0 ?>
-                        <?php while ($row = $result->fetch_assoc()) : ?>
-                            <tr>
-                                <td><?= ++$c ?></td>
-                                <td><img src="<?= $row["image"] ?>" alt="Product Image" style="max-width: 50px;"></td>
-                                <td><?= $row["product_name"] ?></td>
-                                <td><?= $row["group_name"] ?></td>
-                                <td><?= $row["group_id"] ?></td>
-                                <td><?= $row["type_name"] ?></td>
-                                <td><?= $row["common_name"] ?></td>
-                                <td><?= $row["substance_characteristics"] ?></td>
-                                <td><?= $row["packing_size"] ?></td>
-                                <td><?= $row["usage_rate"] ?></td>
-                                <td><?= $row["feature"] ?></td>
-                                <td><?= $row["benefit"] ?></td>
-                                <td>
-                                    <a href="productUpdate.php?id=<?= $row["id"] ?>" class="btn btn-warning btn-sm">แก้ไข</a>
-                                    <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete(<?= $row["id"] ?>)">ลบ</a>
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
-            </div>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
+        
 
-        <?php else : ?>
-            <!-- <div class="alert alert-warning" role="alert">0 results</div> -->
-        <?php endif; ?>
         <?php $conn->close(); ?>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
@@ -276,6 +289,30 @@ $result = $conn->query($sql);
             });
         }
     </script>
+
+    <script>
+        document.getElementById('filterType').addEventListener('change', function() {
+            var filterType = this.value;
+            var tableRows = document.querySelectorAll('#Table tbody tr');
+
+            var counter = 0; // ตัวแปรสำหรับนับเลขใหม่
+
+            tableRows.forEach(function(row) {
+                var rowType = row.querySelector('td:nth-child(6)').textContent; // เลือก cell ที่มีประเภทยา
+
+                if (filterType === '' || rowType === filterType) {
+                    row.style.display = 'table-row';
+                    counter++; // เพิ่มเลขใหม่เมื่อแสดงแถว
+                    row.querySelector('td:first-child').textContent = counter; // กำหนดเลขใหม่ในคอลัมน์แรก
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+
+
 
 
 

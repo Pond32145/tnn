@@ -119,18 +119,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-radius: 5px;
             text-decoration: none;
             /* background-color: green; */
+            color: #000;
+            margin: 0 10px;
+            font-size: 18px;           
+        }
+        .btnn:hover{
+            background-color: #ccc;
+            height: 40px;
+        }
+        .btnnt {
+            padding: 6px;
+            border-radius: 5px;
+            text-decoration: none;
+            background-color: green;
             color: #e9ecef;
             margin: 0 10px;
-            font-size: 13px;
+            font-size: 17px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container mt-5 pt-5">
+    <div class="container mt-5 pt-5" style="margin-bottom: 130px;">
         <div class="d-flex justify-content-between">
-            <button type="submit" class="btnn" onclick="window.location.href ='productRead.php'"><i class="fa-solid fa-arrow-left-long"></i>ย้อนกลับ</button>
-            <h2 class="mb-4">เพิ่มยาฮอร์โมน</h2>
+            <h2>เพิ่มข้อมูลยา&nbsp;&nbsp;<i class="fa-solid fa-pen" style="color: #FFD43B;"></i></i></h2>
+            <div type="submit" class="btnn" onclick="window.location.href ='productRead.php'"><i class="fa-regular fa-circle-left" style="color: #FFD43B; padding-right: 10px;"></i>ย้อนกลับ</div>
         </div>
         <hr style="width: 50%;">
 
@@ -193,11 +206,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
             <div class="col-md-12 mt-4 text-end">
-                <button type="submit" class="btnn">เพิ่ม</button>
+                <button type="submit" class="btnnt">เพิ่มข้อมูล</button>
 
             </div>
         </form>
     </div>
+
 </body>
 
 </html>

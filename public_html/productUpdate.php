@@ -163,25 +163,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <title>อัปเดตยาข้อมูลยา</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/back.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    
 
     <style>
         .btnn {
             padding: 6px;
             border-radius: 5px;
             text-decoration: none;
-            background-color: green;
-            color: #e9ecef;
+            /* background-color: green; */
+            color: #000;
             margin: 0 10px;
-            font-size: 13px;
+            font-size: 18px;           
+        }
+        .btnn:hover{
+            background-color: #ccc;
+            height: 40px;
         }
     </style>
-</head>
 
 <body>
     <div class="container mt-5 mb-5 pt-5">
-        <h2 class="mb-4">อัปเดตยาข้อมูลยา</h2>
+        <div class="d-flex justify-content-between">
+            <h2>อัปเดตยาข้อมูลยา&nbsp;&nbsp; <i class="fa-solid fa-pen" style="color: #FFD43B;"></i></h2>
+            <div type="submit" class="btnn" onclick="window.location.href ='productRead.php'"><i class="fa-regular fa-circle-left" style="color: #FFD43B; padding-right: 10px;"></i>ย้อนกลับ</div>
+        </div>
+
         <hr style="width: 50%;">
         <form method="post" enctype="multipart/form-data">
             <?php
@@ -202,7 +212,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col-md-6 mb-3 text-end pt-3">
                             <label for="new_image" class="form-label">อัปโหลดรูปภาพใหม่</label>
                             <input type="file" class="form-control mb-3" id="new_image" value="<?php echo basename($row['image']); ?>" name="image" accept="image/*">
-                            
+
                         </div>
 
                         <div class="col-md-6 mb-3">
@@ -261,8 +271,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <textarea class="form-control" id="benefit" name="benefit" rows="3" required><?= $row['benefit'] ?></textarea>
                         </div>
                         <div class="col-md mb-3 text-end">
-                            <button type="submit" class="btnn">อัปเดต</button>
-                            <a href="productRead.php" class="btnn">ย้อนกลับ</a>
+                            <button type="submit" class="btn-primary rounded p-2">อัปเดตข้อมูล</button>
                         </div>
                     </div>
             <?php
@@ -276,5 +285,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 </body>
+
 </html>
 <?php include 'footerAdmin.php' ?>
