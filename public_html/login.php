@@ -139,15 +139,14 @@ include "connectdb.php";
 
 <body>
     <div class="body">
-
-        <?php
-        // Check for any error messages in session
-        // session_start();
-        if (isset($_SESSION['error'])) {
-            echo '<p style="color: red;">' . $_SESSION['error'] . '</p>';
-            unset($_SESSION['error']); // Clear error message after displaying
-        }
-        ?>
+        <?php if (isset($_SESSION['error'])) { ?>
+            <div class="alert alert-danger" role="alert">
+                <?php
+                echo $_SESSION['error'];
+                unset($_SESSION['error']);
+                ?>
+            </div>
+        <?php } ?>
         <form action="login_process.php" method="post" class="form_main">
             <img src="./assets/image/6572c358b629729817be1fa4_logo_color256.png" loading="lazy" alt="" style="width: 30%;">
 
@@ -167,7 +166,7 @@ include "connectdb.php";
             </div>
 
             <button id="button">Submit</button>
-            <a class="forgotLink" href="#">Forgot your password?</a>
+            <!-- <a class="forgotLink" href="#">Forgot your password?</a> -->
         </form>
     </div>
     <!-- <a href="regis_form.php">Register</a> -->

@@ -44,7 +44,7 @@ if (isset($_GET['id'])) {
                 <div class="_w-100"><img src="<?= $image ?>" loading="lazy" alt="<?= $product_name ?>"></div>
                 <div class="_w-100 bg-blu">
                     <div data-w-id="a3577948-9d2a-5907-bdd1-2751c3129dc5" style="opacity: 0;" class="box_txt_name">
-                        <h3 class="h3_name_product"><?= $product_name ?></h3>
+                        <h3 class="h3_name_product" style="text-align: center;"><?= $product_name ?></h3>
                         <div class="detail_more">
                             <p class="btn_more_details">รายละเอียดเพิ่มเติม <strong>＞</strong></p>
                         </div>
@@ -98,7 +98,7 @@ if (isset($_GET['id'])) {
                             <p class="text_left">อัตราการใช้</p>
                             <p class="text_left">:</p>
                         </div>
-                        <div class="hl_right">
+                        <div class="hl_right" >
                             <p class="text_left"><?php echo $usage_rate ?></p>
                         </div>
                     </div>

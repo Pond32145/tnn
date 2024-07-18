@@ -1,10 +1,27 @@
 <?php
 $chekeStartPage = true;
 include 'header.php';
+include 'connectdb.php'
 ?>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    .box_border {
+        overflow: hidden;
+        /* ป้องกันการล้นของเนื้อหาภายในกล่อง */
+        height: 100%;
+        /* หรือจะใช้ max-height: 100%; ก็ได้ */
+    }
+
+    .card {
+        overflow: hidden;
+        /* ป้องกันการล้นของเนื้อหาภายในการ์ด */
+        height: 100%;
+        /* หรือจะใช้ max-height: 100%; ก็ได้ */
+    }
+</style>
+
 <section class="experimental-results_main">
-    <div class="header-bg main"><img src="./assets/image/658a747e85fea47ec19cd381_Group%20970.png" loading="lazy" sizes="100vw" 
-    srcset="./assets/image/658a747e85fea47ec19cd381_Group%20970-p-500.png 500w, 
+    <div class="header-bg main"><img src="./assets/image/658a747e85fea47ec19cd381_Group%20970.png" loading="lazy" sizes="100vw" srcset="./assets/image/658a747e85fea47ec19cd381_Group%20970-p-500.png 500w, 
     ./assets/image/658a747e85fea47ec19cd381_Group%20970-p-800.png 800w, 
     ./assets/image/658a747e85fea47ec19cd381_Group%20970-p-1080.png 1080w, 
     ./assets/image/658a747e85fea47ec19cd381_Group%20970.png 1920w" alt="" class="image_bg">
@@ -19,8 +36,7 @@ include 'header.php';
                 <p class="name_btn">Laboratory Testing</p>
             </div>
             <div data-w-id="1134097d-c108-cc78-261b-e138faf1b203" class="tabs_link">
-                <img src="./assets/image/658a771945b75ab5c8a0b1e2_Group%201090.png" loading="lazy" data-w-id="2ffb4478-5271-069f-39a1-4579cb9f6300" sizes="(max-width: 479px) 82vw, (max-width: 767px) 40vw, 41vw" alt="" 
-                srcset="./assets/image/658a771945b75ab5c8a0b1e2_Group%201090-p-500.png 500w, 
+                <img src="./assets/image/658a771945b75ab5c8a0b1e2_Group%201090.png" loading="lazy" data-w-id="2ffb4478-5271-069f-39a1-4579cb9f6300" sizes="(max-width: 479px) 82vw, (max-width: 767px) 40vw, 41vw" alt="" srcset="./assets/image/658a771945b75ab5c8a0b1e2_Group%201090-p-500.png 500w, 
                 ./assets/image/658a771945b75ab5c8a0b1e2_Group%201090.png 685w" class="link_image_btn">
                 <p class="name_btn">Field Trail</p>
             </div>
@@ -28,8 +44,7 @@ include 'header.php';
     </div>
 
     <div class="tabs_content tab_01">
-        <div class="header-bg header_intabs"><img src="./assets/image/658a747e85fea47ec19cd381_Group%20970.png" loading="lazy" sizes="100vw" 
-        srcset="./assets/image/658a747e85fea47ec19cd381_Group%20970-p-500.png 500w, 
+        <div class="header-bg header_intabs"><img src="./assets/image/658a747e85fea47ec19cd381_Group%20970.png" loading="lazy" sizes="100vw" srcset="./assets/image/658a747e85fea47ec19cd381_Group%20970-p-500.png 500w, 
         ./assets/image/658a747e85fea47ec19cd381_Group%20970-p-800.png 800w, 
         ./assets/image/658a747e85fea47ec19cd381_Group%20970-p-1080.png 1080w, 
         ./assets/image/658a747e85fea47ec19cd381_Group%20970.png 1920w" alt="" class="image_bg">
@@ -42,7 +57,64 @@ include 'header.php';
                 </div>
             </div>
         </div>
+
+        <!-- //condb -->
+
         <div class="container contaoner_tab01">
+            <div class="row">
+                <?php
+                include 'connectdb.php';
+
+                $sql = "SELECT product_name, description, usage_rate, pdf_name, pdf_path, image_path FROM lab";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                ?>
+                        <div class="col-12 col-sm-6 mb-4">
+                            <div class="box_border h-100" onclick="clickAddBg()">
+                                <div class="_50per image_tab01">
+                                    <?php if ($row['image_path']) { ?>
+                                        <img src="<?php echo $row['image_path']; ?>" loading="lazy" sizes="100vw" srcset="<?php echo $row['image_path']; ?> 500w, 
+                                             <?php echo $row['image_path']; ?> 800w, 
+                                             <?php echo $row['image_path']; ?> 1128w" alt="" class="image_product">
+                                    <?php } ?>
+                                </div>
+                                <div class="_50per">
+                                    <div class="box_text_lab">
+                                        <h3 class="heading-2"><?php echo htmlspecialchars($row['product_name']); ?></h3>
+                                        <p class="p_text">
+                                            <?php echo "<b>คุณสมบัติ :</b> " . htmlspecialchars($row['description']) . "<br>"; ?>
+                                            <?php echo "<b>อัตราการใช้ :</b> " . htmlspecialchars($row['usage_rate']) . "<br>"; ?>
+                                            <?php if ($row['pdf_name']) { ?>
+                                                <a href="<?php echo $row['pdf_path']; ?>" target="_blank">ข้อมูลผลการทดลอง</a>
+                                            <?php } ?>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                <?php
+                    }
+                } else {
+                    echo "<p class='text-center'>ไม่พบสินค้า</p>";
+                }
+                $conn->close();
+                ?>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> -->
+
+        <!-- <div class="container contaoner_tab01">
             <div data-w-id="e82c5d27-f799-b148-1861-9df9a126f4a5" class="box_border" onclick="clickAddBg()">
                 <div class="_50per image_tab01"><img src="./assets/image/658a747e3c540b89cb752167_Group%2012622x.png" loading="lazy" sizes="100vw" 
                 srcset="./assets/image/658a747e3c540b89cb752167_Group%2012622x-p-500.png 500w, 
@@ -55,11 +127,10 @@ include 'header.php';
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="tabs_content tab_02">
-        <div class="header-bg header_intabs"><img src="./assets/image/658a747e85fea47ec19cd381_Group%20970.png" loading="lazy" sizes="100vw" 
-        srcset="./assets/image/658a747e85fea47ec19cd381_Group%20970-p-500.png 500w, 
+        <div class="header-bg header_intabs"><img src="./assets/image/658a747e85fea47ec19cd381_Group%20970.png" loading="lazy" sizes="100vw" srcset="./assets/image/658a747e85fea47ec19cd381_Group%20970-p-500.png 500w, 
         ./assets/image/658a747e85fea47ec19cd381_Group%20970-p-800.png 800w, 
         ./assets/image/658a747e85fea47ec19cd381_Group%20970-p-1080.png 1080w, 
         ./assets/image/658a747e85fea47ec19cd381_Group%20970.png 1920w" alt="" class="image_bg">
@@ -74,8 +145,7 @@ include 'header.php';
         </div>
         <div class="container contaoner_tab01">
             <div data-w-id="7b99e933-6c0e-5680-0954-899b05375568" class="box_border">
-                <div class="_50per image_tab01"><img src="./assets/image/658a747e3c540b89cb752167_Group%2012622x.png" loading="lazy" sizes="100vw" 
-                srcset="./assets/image/658a747e3c540b89cb752167_Group%2012622x-p-500.png 500w, 
+                <div class="_50per image_tab01"><img src="./assets/image/658a747e3c540b89cb752167_Group%2012622x.png" loading="lazy" sizes="100vw" srcset="./assets/image/658a747e3c540b89cb752167_Group%2012622x-p-500.png 500w, 
                 ./assets/image/658a747e3c540b89cb752167_Group%2012622x-p-800.png 800w, 
                 ./assets/image/658a747e3c540b89cb752167_Group%2012622x.png 1128w" alt="" class="image_product"></div>
                 <div class="_50per">
@@ -97,8 +167,7 @@ include 'header.php';
                 <p class="paragraph">Glufosinate ammonium 15% + Super Potassium Humate 95%</p>
                 <div class="box_border border-01-1">
                     <div class="_50per for_01-1"><a href="#" class="img_testing w-inline-block w-lightbox" aria-label="open lightbox" aria-haspopup="dialog">
-                            <img src="./assets/image/658a747ea496f897fff94680_Image%20432x.png" loading="lazy" sizes="100vw" 
-                            srcset="./assets/image/658a747ea496f897fff94680_Image%20432x-p-500.png 500w, 
+                            <img src="./assets/image/658a747ea496f897fff94680_Image%20432x.png" loading="lazy" sizes="100vw" srcset="./assets/image/658a747ea496f897fff94680_Image%20432x-p-500.png 500w, 
                         ./assets/image/658a747ea496f897fff94680_Image%20432x.png 650w" alt="" class="image_w">
                             <script type="application/json" class="w-json">
                                 {
@@ -140,8 +209,7 @@ include 'header.php';
                 </div>
                 <div class="box_border border-01-1 box_02">
                     <div class="_50per for_01-1"><a href="#" class="img_testing w-inline-block w-lightbox" aria-label="open lightbox" aria-haspopup="dialog">
-                            <img src="./assets/image/658a7481b0f537022d27ee97_Pic%2022x.png" loading="lazy" sizes="100vw" 
-                            srcset="./assets/image/658a7481b0f537022d27ee97_Pic%2022x-p-500.png 500w, 
+                            <img src="./assets/image/658a7481b0f537022d27ee97_Pic%2022x.png" loading="lazy" sizes="100vw" srcset="./assets/image/658a7481b0f537022d27ee97_Pic%2022x-p-500.png 500w, 
                         ./assets/image/658a7481b0f537022d27ee97_Pic%2022x.png 966w" alt="" class="image_w">
                             <script type="application/json" class="w-json">
                                 {
@@ -316,8 +384,7 @@ include 'header.php';
                 <h2 class="h2-01-1">ผลการทดลอง</h2>
                 <div class="box_table">
                     <p class="paragraph"><strong class="txt_b">ตารางที่ 1 : แสดงประสิทธิภาพของ Glufosinate ammonium 15% + Super Potassium Humate 95%</strong></p><a href="#" class="image_table w-inline-block w-lightbox" aria-label="open lightbox" aria-haspopup="dialog">
-                        <img src="./assets/image/658a7481968a859c7bc19f7f_01.png" loading="lazy" sizes="100vw" 
-                        srcset="./assets/image/658a7481968a859c7bc19f7f_01-p-500.png 500w, 
+                        <img src="./assets/image/658a7481968a859c7bc19f7f_01.png" loading="lazy" sizes="100vw" srcset="./assets/image/658a7481968a859c7bc19f7f_01-p-500.png 500w, 
                         ./assets/image/658a7481968a859c7bc19f7f_01-p-800.png 800w, 
                         ./assets/image/658a7481968a859c7bc19f7f_01-p-1080.png 1080w, 
                         ./assets/image/658a7481968a859c7bc19f7f_01.png 1485w" alt="" class="image_lightbox">
@@ -363,8 +430,7 @@ include 'header.php';
                 </div>
                 <div class="box_table">
                     <p class="paragraph"><strong class="txt_b">ตารางที่ 3.1 : แสดงประสิทธิภาพของ Glufosinate ammonium 15% 25 mL : Water 1 L</strong></p><a href="#" class="image_table w-inline-block w-lightbox" aria-label="open lightbox" aria-haspopup="dialog">
-                        <img src="./assets/image/658a74821a3e4e63dfe1089a_03.png" loading="lazy" sizes="100vw" 
-                        srcset="./assets/image/658a74821a3e4e63dfe1089a_03-p-500.png 500w, 
+                        <img src="./assets/image/658a74821a3e4e63dfe1089a_03.png" loading="lazy" sizes="100vw" srcset="./assets/image/658a74821a3e4e63dfe1089a_03-p-500.png 500w, 
                         ./assets/image/658a74821a3e4e63dfe1089a_03-p-800.png 800w, 
                         ./assets/image/658a74821a3e4e63dfe1089a_03-p-1080.png 1080w, 
                         ./assets/image/658a74821a3e4e63dfe1089a_03.png 1485w" alt="" class="image_lightbox">
@@ -387,8 +453,7 @@ include 'header.php';
                 </div>
                 <div class="box_table">
                     <p class="paragraph"><strong class="txt_b">ตารางที่ 3.2 : แสดงประสิทธิภาพของ Super Potassium Humate 95% 5 g : Water 1 L</strong></p><a href="#" class="image_table w-inline-block w-lightbox" aria-label="open lightbox" aria-haspopup="dialog">
-                        <img src="./assets/image/658a748396db4b1e2ba24724_04.png" loading="lazy" sizes="100vw" 
-                        srcset="./assets/image/658a748396db4b1e2ba24724_04-p-500.png 500w, 
+                        <img src="./assets/image/658a748396db4b1e2ba24724_04.png" loading="lazy" sizes="100vw" srcset="./assets/image/658a748396db4b1e2ba24724_04-p-500.png 500w, 
                         ./assets/image/658a748396db4b1e2ba24724_04-p-800.png 800w, 
                         ./assets/image/658a748396db4b1e2ba24724_04-p-1080.png 1080w, 
                         ./assets/image/658a748396db4b1e2ba24724_04.png 1485w" alt="" class="image_lightbox">
@@ -411,8 +476,7 @@ include 'header.php';
                 </div>
                 <div class="box_table">
                     <p class="paragraph"><strong class="txt_b">ตารางที่ 4 : แสดงประสิทธิภาพของ Glufosinate 15% 25 ml : Water 1 L และสเปรย์ซ้าด้วย Super Potassium Humate 95% 5 g : Water 1 L</strong></p><a href="#" class="image_table w-inline-block w-lightbox" aria-label="open lightbox" aria-haspopup="dialog">
-                        <img src="./assets/image/658a7483b5e8da8b79545ed4_05.png" loading="lazy" sizes="100vw" 
-                        srcset="./assets/image/658a7483b5e8da8b79545ed4_05-p-500.png 500w, 
+                        <img src="./assets/image/658a7483b5e8da8b79545ed4_05.png" loading="lazy" sizes="100vw" srcset="./assets/image/658a7483b5e8da8b79545ed4_05-p-500.png 500w, 
                         ./assets/image/658a7483b5e8da8b79545ed4_05-p-800.png 800w, 
                         ./assets/image/658a7483b5e8da8b79545ed4_05-p-1080.png 1080w, 
                         ./assets/image/658a7483b5e8da8b79545ed4_05.png 1547w" alt="" class="image_lightbox">
@@ -435,8 +499,7 @@ include 'header.php';
                 </div>
                 <div class="box_table">
                     <p class="paragraph"><strong class="txt_b">ตารางที่ 5 : แสดงประสิทธิภาพของ Super Potassium Humate 95% 5 g : Water 1 L และสเปรย์ซ้าด้วย Glufosinate 15% 25 ml : Water 1 L </strong></p><a href="#" class="image_table w-inline-block w-lightbox" aria-label="open lightbox" aria-haspopup="dialog">
-                        <img src="./assets/image/658a74843400b61befc29860_06.png" loading="lazy" sizes="100vw" 
-                        srcset="./assets/image/658a74843400b61befc29860_06-p-500.png 500w, 
+                        <img src="./assets/image/658a74843400b61befc29860_06.png" loading="lazy" sizes="100vw" srcset="./assets/image/658a74843400b61befc29860_06-p-500.png 500w, 
                         ./assets/image/658a74843400b61befc29860_06-p-800.png 800w, 
                         ./assets/image/658a74843400b61befc29860_06-p-1080.png 1080w, 
                         ./assets/image/658a74843400b61befc29860_06.png 1547w" alt="" class="image_lightbox">
