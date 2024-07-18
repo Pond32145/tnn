@@ -30,3 +30,5 @@ $stmt->close();
 $conn->close();
 echo "<br><a href='labRead.php' class='btn btn-primary'>Go back</a>";
 ?>
+
+
