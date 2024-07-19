@@ -185,7 +185,7 @@
         <a href="experimental_results.php" class="nav_link w-nav-link" style="max-width: 1440px;">ผลการทดลอง</a>
         <a href="technique.php" class="nav_link w-nav-link" style="max-width: 1440px;">เทคนิคการใช้</a>
         <a href="contact.php" class="nav_link w-nav-link" style="max-width: 1440px;">ติดต่อ</a>
-        <a href="login.php" class="nav_link w-nav-link" style="max-width: 1440px;">เข้าสู่ระบบ</a>
+        
         <div class="nav-btn">
 
           <a href="#" class="link_logo w-inline-block">

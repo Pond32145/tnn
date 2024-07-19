@@ -2449,11 +2449,11 @@ textarea.w-select {
 }
 
 .container.contaoner_tab01 {
-  height: auto;
+  /* height: auto; */
   justify-content: center;
   align-items: center;
-  padding-top: 5%;
-  padding-bottom: 5%;
+  /* padding-top: 5%; */
+  /* padding-bottom: 5%; */
   display: flex;
 }
 

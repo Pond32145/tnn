@@ -8,6 +8,8 @@
                 <a href="https://www.facebook.com/profile.php?id=100063951103766" class="link_txt">Facebook</a>
                 <a href="https://lin.ee/NCvY9J9" class="link_txt">Line</a>
                 <a href="https://www.youtube.com/@tnnchemical.contact/videos" class="link_txt">Youtube</a>
+                <a href="login.php" class="link_txt">Login</a>
+                
             </div>
             <div class="box_menu">
                 <p class="head_menu">Contact Us</p>

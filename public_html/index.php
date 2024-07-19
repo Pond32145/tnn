@@ -3,6 +3,7 @@
 $chekeStartPage = true; 
 include 'header.php'; 
 ?>
+ 
 
     <section class="sec_top">
         <img src="./assets/image/65716e71ccb8efa53ebd071c_Scroll%20Group%204.png" loading="lazy" sizes="100vw" 

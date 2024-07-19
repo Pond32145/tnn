@@ -12,26 +12,141 @@ include 'connectdb.php'
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css');
+        /* @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css'); */
 
-        /* ลดระยะห่างด้านบนทั้งหมด */
-        :root {
-            --bs-gutter-x: 0;
-            --bs-gutter-y: 0;
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            margin-right: auto;
+            margin-left: auto;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+        .col-12 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        .col-sm-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        .mb-4 {
+            margin-bottom: 1.5rem;
         }
 
         .box_border {
-            overflow: hidden;
-            /* ป้องกันการล้นของเนื้อหาภายในกล่อง */
+            border: 1px solid #ddd;
+            padding: 15px;
+            background: #fff;
             height: 100%;
-            /* หรือจะใช้ max-height: 100%; ก็ได้ */
         }
 
-        .card {
+        .image_tab01 {
+            width: 50%;
+            float: left;
+        }
+
+        .image_product {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .heading-2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .p_text {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .header-bg {
+            position: relative;
+            width: 100%;
             overflow: hidden;
-            /* ป้องกันการล้นของเนื้อหาภายในการ์ด */
-            height: 100%;
-            /* หรือจะใช้ max-height: 100%; ก็ได้ */
+        }
+
+        .image_bg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .box_ab_ex-re {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+        }
+
+        .tabs_main {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .tabs_link {
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .link_image_btn {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .name_btn {
+            font-size: 1rem;
+            margin-top: 0.5rem;
         }
     </style>
 </head>
@@ -77,7 +192,6 @@ include 'connectdb.php'
             </div>
 
             <!-- //condb -->
-
             <div class="container contaoner_tab01">
                 <div class="row">
                     <?php
@@ -94,8 +208,8 @@ include 'connectdb.php'
                                     <div class="_50per image_tab01">
                                         <?php if ($row['image_path']) { ?>
                                             <img src="<?php echo $row['image_path']; ?>" loading="lazy" sizes="100vw" srcset="<?php echo $row['image_path']; ?> 500w,
-                                             <?php echo $row['image_path']; ?> 800w,
-                                             <?php echo $row['image_path']; ?> 1128w" alt="" class="image_product">
+                                                 <?php echo $row['image_path']; ?> 800w,
+                                                 <?php echo $row['image_path']; ?> 1128w" alt="" class="image_product">
                                         <?php } ?>
                                     </div>
                                     <div class="_50per">
@@ -108,13 +222,10 @@ include 'connectdb.php'
                                                     <a href="<?php echo $row['pdf_path']; ?>" target="_blank">ข้อมูลผลการทดลอง</a>
                                                 <?php } ?>
                                             </p>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
                     <?php
                         }
                     } else {
@@ -124,7 +235,6 @@ include 'connectdb.php'
                     ?>
                 </div>
             </div>
-
 
 
 
