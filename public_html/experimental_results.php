@@ -12,8 +12,6 @@ include 'connectdb.php'
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        /* @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css'); */
-
         /* General reset */
         * {
             margin: 0;
@@ -197,7 +195,8 @@ include 'connectdb.php'
                     <?php
                     include 'connectdb.php';
 
-                    $sql = "SELECT product_name, description, usage_rate, pdf_name, pdf_path, image_path FROM lab";
+                    // Adjust the SQL query to include a WHERE clause for type_id
+                    $sql = "SELECT product_name, description, usage_rate, pdf_name, pdf_path, image_path FROM lab WHERE type_id = 1";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
@@ -208,8 +207,8 @@ include 'connectdb.php'
                                     <div class="_50per image_tab01">
                                         <?php if ($row['image_path']) { ?>
                                             <img src="<?php echo $row['image_path']; ?>" loading="lazy" sizes="100vw" srcset="<?php echo $row['image_path']; ?> 500w,
-                                                 <?php echo $row['image_path']; ?> 800w,
-                                                 <?php echo $row['image_path']; ?> 1128w" alt="" class="image_product">
+                                     <?php echo $row['image_path']; ?> 800w,
+                                     <?php echo $row['image_path']; ?> 1128w" alt="" class="image_product">
                                         <?php } ?>
                                     </div>
                                     <div class="_50per">
@@ -236,11 +235,6 @@ include 'connectdb.php'
                 </div>
             </div>
 
-
-
-
-
-
         </div>
         <div class="tabs_content tab_02">
             <div class="header-bg header_intabs"><img src="./assets/image/658a747e85fea47ec19cd381_Group%20970.png" loading="lazy" sizes="100vw" srcset="./assets/image/658a747e85fea47ec19cd381_Group%20970-p-500.png 500w,
@@ -257,23 +251,56 @@ include 'connectdb.php'
                 </div>
             </div>
             <div class="container contaoner_tab01">
-                <div data-w-id="7b99e933-6c0e-5680-0954-899b05375568" class="box_border">
-                    <div class="_50per image_tab01"><img src="./assets/image/658a747e3c540b89cb752167_Group%2012622x.png" loading="lazy" sizes="100vw" srcset="./assets/image/658a747e3c540b89cb752167_Group%2012622x-p-500.png 500w,
-                ./assets/image/658a747e3c540b89cb752167_Group%2012622x-p-800.png 800w,
-                ./assets/image/658a747e3c540b89cb752167_Group%2012622x.png 1128w" alt="" class="image_product"></div>
-                    <div class="_50per">
-                        <div class="box_text_lab">
-                            <h3 class="heading-2">กลูโฟซิเนต-ตายเรียบ</h3>
-                            <p class="p_text">คุณสมบัติ : ฆ่าหญ้าตายยาก ฟื้นฟูดิน<br>อัตราการใช้ : ใช้กลูโฟซิเนต 250 มิลลิลิตร ต่อน้ำ 20 ลิตร<br>ใช้ซูปเปอร์ ตายเรียบ 5 กรัม</p>
-                        </div>
-                    </div>
+                <div class="row">
+                    <?php
+                    include 'connectdb.php';
+
+                    // Adjust the SQL query to include a WHERE clause for type_id
+                    $sql = "SELECT product_name, description, usage_rate, pdf_name, pdf_path, image_path FROM lab WHERE type_id = 2";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                    ?>
+                            <div class="col-12 col-sm-6 mb-4">
+                                <div class="box_border h-100">
+                                    <div class="_50per image_tab01">
+                                        <?php if ($row['image_path']) { ?>
+                                            <img src="<?php echo $row['image_path']; ?>" loading="lazy" sizes="100vw" srcset="<?php echo $row['image_path']; ?> 500w,
+                                     <?php echo $row['image_path']; ?> 800w,
+                                     <?php echo $row['image_path']; ?> 1128w" alt="" class="image_product">
+                                        <?php } ?>
+                                    </div>
+                                    <div class="_50per">
+                                        <div class="box_text_lab">
+                                            <h3 class="heading-2"><?php echo htmlspecialchars($row['product_name']); ?></h3>
+                                            <p class="p_text">
+                                                <?php echo "<b>คุณสมบัติ :</b> " . htmlspecialchars($row['description']) . "<br>"; ?>
+                                                <?php echo "<b>อัตราการใช้ :</b> " . htmlspecialchars($row['usage_rate']) . "<br>"; ?>
+                                                <?php if ($row['pdf_name']) { ?>
+                                                    <a href="<?php echo $row['pdf_path']; ?>" target="_blank">ข้อมูลผลการทดลอง</a>
+                                                <?php } ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    <?php
+                        }
+                    } else {
+                        echo "<p class='text-center'>ไม่พบสินค้า</p>";
+                    }
+                    $conn->close();
+                    ?>
                 </div>
             </div>
+
         </div>
 
     </section>
 </body>
 
 </html>
+
 
 <?php include 'footer.php'; ?>

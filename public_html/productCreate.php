@@ -136,11 +136,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin: 0 10px;
             font-size: 17px;
         }
+        .border-main{
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            margin-bottom: 130px;
+            border-radius: 8px;
+            padding: 20px;
+        }
     </style>
 </head>
 
-<body>
-    <div class="container mt-5 pt-5" style="margin-bottom: 130px;">
+<body  class='pt-5 '>
+    <div class="container mt-5 pt-5 px-5 border-main bg-light" style="margin-bottom: 130px;">
         <div class="d-flex justify-content-between">
             <h2>เพิ่มข้อมูลยา&nbsp;&nbsp;<i class="fa-solid fa-pen" style="color: #FFD43B;"></i></i></h2>
             <div type="submit" class="btnn" onclick="window.location.href ='productRead.php'"><i class="fa-regular fa-circle-left" style="color: #FFD43B; padding-right: 10px;"></i>ย้อนกลับ</div>

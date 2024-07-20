@@ -174,18 +174,20 @@
             <img src="./assets/image/caret-down.svg" alt="" class="icon-down">
           </div>
           <nav class="w-dropdown-list" id="w-dropdown-list-0" aria-labelledby="w-dropdown-toggle-0">
-            <a href="Insects.php" class="w-dropdown-link" tabindex="0">แมลง</a>
-            <a href="Weeds.php" class="w-dropdown-link" tabindex="0">วัชพืช</a>
-            <a href="Supplements.php" class="w-dropdown-link" tabindex="0">สารเสริม</a>
-            <a href="Hormones.php" class="w-dropdown-link" tabindex="0">ฮอร์โมน</a>
-            <a href="PlantDiseases.php" class="w-dropdown-link" tabindex="0">โรคพืช</a>
+            <div class="w-dropdown-content">
+              <a href="Insects.php" class="w-dropdown-link" tabindex="0">แมลง</a>
+              <a href="Weeds.php" class="w-dropdown-link" tabindex="0">วัชพืช</a>
+              <a href="Supplements.php" class="w-dropdown-link" tabindex="0">สารเสริม</a>
+              <a href="Hormones.php" class="w-dropdown-link" tabindex="0">ฮอร์โมน</a>
+              <a href="PlantDiseases.php" class="w-dropdown-link" tabindex="0">โรคพืช</a>
+            </div>
           </nav>
         </div>
 
         <a href="experimental_results.php" class="nav_link w-nav-link" style="max-width: 1440px;">ผลการทดลอง</a>
         <a href="technique.php" class="nav_link w-nav-link" style="max-width: 1440px;">เทคนิคการใช้</a>
         <a href="contact.php" class="nav_link w-nav-link" style="max-width: 1440px;">ติดต่อ</a>
-        
+
         <div class="nav-btn">
 
           <a href="#" class="link_logo w-inline-block">
@@ -220,3 +222,25 @@
     </div>
     <div class="w-nav-overlay" data-wf-ignore="" id="w-nav-overlay-0"></div>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var dropdownToggle = document.querySelector('.w-dropdown-toggle');
+      var dropdownContent = document.querySelector('.w-dropdown-content');
+
+      dropdownToggle.addEventListener('click', function() {
+        // Toggle dropdown visibility
+        if (dropdownContent.style.display === 'none' || dropdownContent.style.display === '') {
+          dropdownContent.style.display = 'block';
+        } else {
+          dropdownContent.style.display = 'none';
+        }
+      });
+
+      // Hide dropdown if clicked outside of it
+      document.addEventListener('click', function(event) {
+        if (!dropdownToggle.contains(event.target) && !dropdownContent.contains(event.target)) {
+          dropdownContent.style.display = 'none';
+        }
+      });
+    });
+  </script>

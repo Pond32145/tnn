@@ -10,8 +10,8 @@ include "connectdb.php";
 <head>
     <title>Login</title>
     <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/back.css">
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="./assets/css/back.css"> -->
     <style>
         .body {
             height: 100%;

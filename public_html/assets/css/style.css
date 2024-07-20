@@ -1466,6 +1466,14 @@ textarea.w-select {
   display: inline-block;
   position: relative;
 }
+.w-dropdown-content {
+  display: none; /* Hide the dropdown content by default */
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 900;
+}
 
 .w-dropdown-btn,
 .w-dropdown-toggle,

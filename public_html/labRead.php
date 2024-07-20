@@ -89,7 +89,6 @@ $result = $conn->query($sql);
         .bg-sha {
             box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
         }
-
     </style>
 
 </head>
@@ -100,13 +99,24 @@ $result = $conn->query($sql);
 
         <div class="d-flex justify-content-between mb-3">
             <h2>รายการข้อมูลการทดลอง</h2>
-            <div>
-            <a href="labCreate.php" class="btnn">เพิ่มข้อมูล</a>
-        </div>
+            <div class="mb-3 flex d-flex justify-content-end align-items-center" style="font-size: medium;">
+                <label for="filterType" class="form-label pt-2" style="font-size: small;text-decoration: none;">กรองตาม :</label>
+                <select class="form-select" style="width: 100px;font-size: small;" id="filterType">
+                    <option value="">ทั้งหมด</option>
+                    <option value="การทดสอบในห้องปฏิบัติการ">การทดสอบในห้องปฏิบัติการ</option>
+                    <option value="การทดสอบจริงภายนอก">การทดสอบจริงภายนอก</option>
+                </select>
+                <a href="labCreate.php" class="btnn">เพิ่มข้อมูล</a>
+            </div>
         </div>
 
         <?php
-        $sql = "SELECT * FROM lab";
+        $filterType = isset($_GET['filterType']) ? $_GET['filterType'] : '';
+        $sql = "SELECT * FROM lab JOIN 
+                lab_type ON lab.type_id = lab_type.type_id;";
+        if (!empty($filterType)) {
+            $sql .= " WHERE lab_type.type_id = " . intval($filterType);
+        }
         $result = $conn->query($sql);
         ?>
 
@@ -119,6 +129,7 @@ $result = $conn->query($sql);
                         <th>ชื่อสินค้า</th>
                         <th>คุณสมบัติ</th>
                         <th>อัตราการใช้งาน</th>
+                        <th>ประเภทการทดลอง</th>
                         <th>PDF</th>
                         <th>ดำเนินการ</th>
                     </tr>
@@ -132,17 +143,17 @@ $result = $conn->query($sql);
                             <td><img src="<?= $row['image_path'] ?>" alt="Product Image" style="max-width: 50px;"></td>
                             <td><?= htmlspecialchars($row['product_name']) ?></td>
                             <td><?= htmlspecialchars($row['description']) ?></td>
-                            <td ><?= htmlspecialchars($row['usage_rate']) ?></td>
-                            <td style="max-width: 200px;">
-                                <?php if ($row['pdf_name']) { ?>
-                                    <a href="<?php echo $row['pdf_path']; ?>" target="_blank"><?php echo htmlspecialchars($row['pdf_name']); ?></a>
-                                <?php } else { ?>
-                                    -
-                                <?php } ?>
+                            <td style="max-width: 350px;"><?= htmlspecialchars($row['usage_rate']) ?></td>
+                            <td style="max-width: 350px;"><?= htmlspecialchars($row['type_name']) ?></td>
+
+                            <td style="max-width: 100px;">
+                                <?php if (!empty($row['pdf_path'])) { ?>
+                                <a href="<?= htmlspecialchars($row['pdf_path']) ?>" target="_blank"><?= basename($row['pdf_path']) ?></a>
+                            <?php } ?>
                             </td>
                             <td>
                                 <a href="labUpdate.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm">แก้ไข</a>
-                                <a href="labDelete.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm" onclick="confirmDelete(<?= $row["id"] ?>)">ลบ</a>
+                                <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete(<?= $row["id"] ?>)">ลบ</a>
                             </td>
                         </tr>
                     <?php endwhile; ?>
@@ -175,7 +186,7 @@ $result = $conn->query($sql);
                 }
             });
 
-        
+
         });
 
         function confirmDelete(id) {
@@ -195,6 +206,27 @@ $result = $conn->query($sql);
             });
         }
     </script>
+    <script>
+        document.getElementById('filterType').addEventListener('change', function() {
+            var filterType = this.value;
+            var tableRows = document.querySelectorAll('#Table tbody tr');
+
+            var counter = 0; // ตัวแปรสำหรับนับเลขใหม่
+
+            tableRows.forEach(function(row) {
+                var rowType = row.querySelector('td:nth-child(6)').textContent; // เลือก cell ที่มีประเภทยา
+
+                if (filterType === '' || rowType === filterType) {
+                    row.style.display = 'table-row';
+                    counter++; // เพิ่มเลขใหม่เมื่อแสดงแถว
+                    row.querySelector('td:first-child').textContent = counter; // กำหนดเลขใหม่ในคอลัมน์แรก
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
 
 </body>
 
