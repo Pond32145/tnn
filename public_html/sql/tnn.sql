@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2024 at 07:59 PM
+-- Generation Time: Jul 22, 2024 at 05:15 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -36,17 +36,40 @@ CREATE TABLE `lab` (
   `pdf_path` varchar(255) DEFAULT NULL,
   `image_name` varchar(255) DEFAULT NULL,
   `image_path` varchar(255) DEFAULT NULL,
-  `uploaded_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `uploaded_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `type_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `lab`
 --
 
-INSERT INTO `lab` (`id`, `product_name`, `description`, `usage_rate`, `pdf_name`, `pdf_path`, `image_name`, `image_path`, `uploaded_at`) VALUES
-(1, '111กลูโฟซิเนต-ตายเรียบ1212', 'ฆ่าหญ้าตายยาก ฟื้นฟูดิน', 'ใช้กลูโฟซิเนต 250 มิลลิลิตร ต่อน้ำ 20 ลิตร ใช้ซูปเปอร์ ตายเรียบ 5 กรัม', 'ท่องเที่ยว.pdf', 'uploads_lab/ท่องเที่ยว.pdf', 'weed4.png', 'uploads_lab/weed4.png', '2024-07-18 14:38:01'),
-(5, 'แพคโคลบิวทราซอล', 'แพคโคลบิวทราซอลแพคโคลบิวทราซอล', 'ใช้กลูโฟซิเนต 250 มิลลิลิตร ต่อน้ำ 20 ลิตร ใช้ซูปเปอร์ ตายเรียบ 5 กรัม', '64-38 644230009-คำถามทบทวนบทที่ 7.pdf', 'uploads_lab/64-38 644230009-คำถามทบทวนบทที่ 7.pdf', 'hormone2.png', 'uploads_lab/hormone2.png', '2024-07-18 15:46:58'),
-(6, 'คาร์วีติน เอสซี', 'คาร์วีติน เอสซีคาร์วีติน เอสซี', 'ใช้กลูโฟซิเนต 250 มิลลิลิตร ต่อน้ำ 20 ลิตร ใช้ซูปเปอร์ ตายเรียบ 5 กรัม', '64-38 644230009-คำถามทบทวนบทที่ 8.pdf', 'uploads_lab/64-38 644230009-คำถามทบทวนบทที่ 8.pdf', 'supplement5.png', 'uploads_lab/supplement5.png', '2024-07-18 16:01:56');
+INSERT INTO `lab` (`id`, `product_name`, `description`, `usage_rate`, `pdf_name`, `pdf_path`, `image_name`, `image_path`, `uploaded_at`, `type_id`) VALUES
+(1, 'กลูโฟซิเนต-ตายเรียบ1212', 'ฆ่าหญ้าตายยาก ฟื้นฟูดิน', 'ใช้กลูโฟซิเนต 250 มิลลิลิตร ต่อน้ำ 20 ลิตร ใช้ซูปเปอร์ ตายเรียบ 5 กรัม', 'ท่องเที่ยว.pdf', 'uploads_lab/เทส01.pdf', 'weed4.png', 'uploads_lab/hormone1.png', '2024-07-18 14:38:01', 1),
+(9, 'อีทีฟอน 52', 'ฆ่าหญ้าตายยาก ฟื้นฟูดิน', '25-50 กรัม ต่อน้ำ 20 ลิตร หรือ คลุกกับเมล็ดพันธุ์ 7 กรัม ต่อ เมล็ด 1 กิโลกรัม', '495339496012513746_แบบฝึกหัด-การคำนวณระยะทาง-ระหว่างจังหวัด-3-สมุทร.pdf', 'uploads_lab/เทส02.pdf', 'plantDisease10.png', 'uploads_lab/plantDisease10.png', '2024-07-19 09:43:09', 2),
+(15, 'คาร์วีติน เอสซี', 'ฆ่าหญ้าตายยาก ฟื้นฟูดิน', 'ใช้กลูโฟซิเนต 250 มิลลิลิตร ต่อน้ำ 20 ลิตร ใช้ซูปเปอร์ ตายเรียบ 5 กรัม', 'การเขียนรายการนำเที่ยว-1-Day-Trip-1.pdf', 'uploads_lab/เทส04.pdf', 'plantDisease8.png', 'uploads_lab/plantDisease8.png', '2024-07-19 10:17:37', 1),
+(16, 'อีทีฟอน 52', '20-30 มิลลิลิตร ต่อน้ำ 20 ลิตร', '20-30 มิลลิลิตร ต่อน้ำ 20 ลิตร', '64-38 644230009-Laws-คลิปวิดีโอ 1.pdf', 'uploads_lab/เทส05.pdf', 'supplement4.png', 'uploads_lab/supplement4.png', '2024-07-19 13:25:53', 2),
+(19, 'อีทีฟอน 52', '20-30 มิลลิลิตร ต่อน้ำ 20 ลิตร', '20-30 มิลลิลิตร ต่อน้ำ 20 ลิตร', '495339496012513746_แบบฝึกหัด-การคำนวณระยะทาง-ระหว่างจังหวัด-3-สมุทร.pdf', 'uploads_lab/เทส03.pdf', 'hormone1.png', 'uploads_lab/hormone3.png', '2024-07-19 14:07:45', 2),
+(20, 'คาร์วีติน เอสซี', '25-50 กรัม ต่อน้ำ 20 ลิตร ', '25-50 กรัม ต่อน้ำ 20 ลิตร หรือ คลุกกับเมล็ดพันธุ์ 7 กรัม ต่อ เมล็ด 1 กิโลกรัม', 'เทส06.pdf', 'uploads_lab/เทส06.pdf', 'supplement6.png', 'uploads_lab/supplement6.png', '2024-07-20 10:09:22', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lab_type`
+--
+
+CREATE TABLE `lab_type` (
+  `type_id` int(11) NOT NULL,
+  `type_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `lab_type`
+--
+
+INSERT INTO `lab_type` (`type_id`, `type_name`) VALUES
+(1, 'การทดสอบในห้องปฏิบัติการ'),
+(2, 'การทดสอบจริงภายนอก');
 
 -- --------------------------------------------------------
 
@@ -149,7 +172,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password_hash`, `created_at`, `first_name`, `last_name`, `birthdate`, `position`) VALUES
-(2, 'admin', '$2y$10$CPATqlEe2JzysL60kCRCieeOjez2QPDBlc7qBJzg2IFfW2e7bzVse', '2024-07-14 17:28:58', 'admin', 'admin', '2024-07-09', 'admin');
+(2, 'admin', '$2y$10$CPATqlEe2JzysL60kCRCieeOjez2QPDBlc7qBJzg2IFfW2e7bzVse', '2024-07-14 17:28:58', 'admin', 'admin', '2024-07-09', 'admin'),
+(3, 't&n-admin', '$2y$10$dySjfKD.ZzYtHG648YX5oOud9qEckcnnezPLCbvKmaeeBV8C.2Rja', '2024-07-20 08:32:49', 'admin', 'admin', '2024-07-17', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -159,7 +183,14 @@ INSERT INTO `users` (`id`, `username`, `password_hash`, `created_at`, `first_nam
 -- Indexes for table `lab`
 --
 ALTER TABLE `lab`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_lab_type` (`type_id`);
+
+--
+-- Indexes for table `lab_type`
+--
+ALTER TABLE `lab_type`
+  ADD PRIMARY KEY (`type_id`);
 
 --
 -- Indexes for table `product`
@@ -189,7 +220,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `lab`
 --
 ALTER TABLE `lab`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `lab_type`
+--
+ALTER TABLE `lab_type`
+  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -201,11 +238,17 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `lab`
+--
+ALTER TABLE `lab`
+  ADD CONSTRAINT `fk_lab_type` FOREIGN KEY (`type_id`) REFERENCES `lab_type` (`type_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `product`
