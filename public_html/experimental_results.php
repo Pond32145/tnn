@@ -191,7 +191,7 @@ include 'connectdb.php'
 
             <!-- //condb -->
             <div class="container contaoner_tab01">
-                <div class="row">
+                <div class="row "  style="margin-top: 70px; margin-bottom: 70px;">
                     <?php
                     include 'connectdb.php';
 
@@ -202,7 +202,7 @@ include 'connectdb.php'
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                     ?>
-                            <div class="col-12 col-sm-6 mb-4">
+                            <div class="col-12 col-sm-6 mb-4" >
                                 <div class="box_border h-100">
                                     <div class="_50per image_tab01">
                                         <?php if ($row['image_path']) { ?>
@@ -251,7 +251,7 @@ include 'connectdb.php'
                 </div>
             </div>
             <div class="container contaoner_tab01">
-                <div class="row">
+                <div class="row"  style="margin-top: 70px;margin-bottom: 70px;">
                     <?php
                     include 'connectdb.php';
 

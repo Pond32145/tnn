@@ -159,7 +159,6 @@ $result = $conn->query($sql);
     <div class="container mt-5 p-3 bg-white bg-sha" style="border-radius: 8px; margin-bottom:30px; ">
 
         <div class="d-flex justify-content-between">
-            <!-- <a href="update_passForm.php">เปลี่ยนรหัสผ่าน</a> -->
             <h2 class="mb-3">รายการข้อมูลผลิตภัณฑ์</h2>
 
         

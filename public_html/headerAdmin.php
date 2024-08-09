@@ -193,6 +193,7 @@
         display: block;
         cursor: pointer;
         margin-top: 10px;
+        
       }
 
       .hamburger .line {
@@ -233,6 +234,7 @@
       <nav role="navigation" class="nav_menu w-nav-menu">
         <a href="productRead.php" class="nav_link w-nav-link" style="max-width: 1440px;">ผลิตภัณฑ์</a>
         <a href="labRead.php" class="nav_link w-nav-link" style="max-width: 1440px;">ผลการทดลอง</a>
+        <a href="resetPassword.php" class="nav_link w-nav-link" style="max-width: 1440px;">เปลี่ยนรหัสผ่าน</a>
         <a href="logout.php" class="nav_link w-nav-link" style="max-width: 1440px;color:red;">ออกจากระบบ</a>
 
         <div class="nav-btn">

@@ -166,15 +166,14 @@
       <nav role="navigation" class="nav_menu w-nav-menu">
         <a href="about_us.php" class="nav_link w-nav-link" style="max-width: 1440px;">เกี่ยวกับเรา</a>
         <!-- <a href="product.php" class="nav_link w-nav-link" style="max-width: 1440px;">ผลิตภัณฑ์</a> -->
-        <div data-hover="false" data-delay="0" class="dropdown-2 w-dropdown" style="max-width: 1440px;">
+        <div data-hover="false" data-delay="0" class="dropdown-2 w-dropdown" style="max-width: 1440px; ">
           <div class="nav_link dropdown w-dropdown-toggle" id="w-dropdown-toggle-0" aria-controls="w-dropdown-list-0" aria-haspopup="menu" aria-expanded="false" role="button" tabindex="0">
-
 
             <a href="product.php" class="nav_link w-nav-link" style="text-decoration: none; padding:0px;">ผลิตภัณฑ์ </a>
             <img src="./assets/image/caret-down.svg" alt="" class="icon-down">
           </div>
           <nav class="w-dropdown-list" id="w-dropdown-list-0" aria-labelledby="w-dropdown-toggle-0">
-            <div class="w-dropdown-content">
+            <div class="w-dropdown-content"  style=" background-color:#433D8B;">
               <a href="Insects.php" class="w-dropdown-link" tabindex="0">แมลง</a>
               <a href="Weeds.php" class="w-dropdown-link" tabindex="0">วัชพืช</a>
               <a href="Supplements.php" class="w-dropdown-link" tabindex="0">สารเสริม</a>
@@ -201,7 +200,7 @@
           <div class="icon w-icon-nav-menu"></div>
         </div>
         <div class="nav-btn mobile">
-          <div class="box_en_th">
+          <!-- <div class="box_en_th">
             <div class="box_btn_en_th">
               <div class="box_btn">
                 <div data-w-id="02cb70f1-875e-1845-5fce-48cb39a68a41" class="btn">
@@ -213,7 +212,7 @@
                 <div class="text_en_th en">EN</div>
               </div>
             </div>
-          </div>
+          </div> -->
           <a href="#" class="link_logo w-inline-block">
             <img src="./assets/image/65716e6f33cc4d93c22c0c7e_logo.svg" loading="lazy" alt="" class="logo_m"></a>
         </div>
